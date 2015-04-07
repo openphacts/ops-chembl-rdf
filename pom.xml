@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.openphacts.data</groupId>
+  <artifactId>chembl-rdf</artifactId>
+  <version>20.0</version>
+  <packaging>jar</packaging>
+  <name>ChEML RDF data</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>wagon-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>download</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${project.version}/</url>
+          <toDir>${project.build.directory}/classes</toDir>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>ops</id>
+      <name>Open PHACTS repository</name>
+      <url>http://repository.mygrid.org.uk/artifactory/ops/</url>
+      <releases />
+      <snapshots />
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>ops</id>
+      <name>Open PHACTS repository</name>
+      <url>http://repository.mygrid.org.uk/artifactory/ops/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ops</id>
+      <name>Open PHACTS repository</name>
+      <url>http://repository.mygrid.org.uk/artifactory/ops/</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
