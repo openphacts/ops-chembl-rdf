@@ -26,7 +26,7 @@
           </execution>
         </executions>
         <configuration>
-          <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${project.version}/</url>
+          <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/20.0</url>
           <toDir>${project.build.directory}/classes/chembl</toDir>
         </configuration>
       </plugin>
