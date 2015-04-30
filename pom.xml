@@ -5,11 +5,31 @@
   <artifactId>chembl-rdf</artifactId>
   <version>20.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>ChEML RDF data</name>
+  <name>ChEMBL-RDF data</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <chembl.version>20.0</chembl.version>
   </properties>
+
+  <licenses>
+    <license>
+      <name>Creative Commons Attribution-ShareAlike 3.0 Unported</name>
+      <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}/LICENSE</url>
+      <comments>
+The data in ChEMBL is covered by the licence in the file LICENSE.
+
+Under the -BY clause, we request attribution for subsequent use of ChEMBL.
+
+For publications using ChEMBL data, the primary current citation is: 
+
+1. A.P. Bento, A. Gaulton, A. Hersey, L.J. Bellis, J. Chambers, M. Davies, F.A. Krüger, Y. Light, L. Mak, S. McGlinchey, M. Nowotka, G. Papadatos, R. Santos &amp; J.P. Overington (2014) 'The ChEMBL bioactivity database: an update' Nucl. Acids Res. Database Issue. 42 D1083-D1090 DOI:10.1093/nar/gkt1031 PMID:24214965
+
+If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are preserved, and that the release number of ChEMBL is clearly displayed.
+      </comments>
+    </license>
+  </licenses>
+
 
   <build>
     <plugins>
@@ -19,16 +39,42 @@
         <version>1.0</version>
         <executions>
           <execution>
+            <id>download-rdf</id>
             <phase>generate-resources</phase>
             <goals>
               <goal>download</goal>
             </goals>
+            <configuration>
+              <includes>*.ttl.gz</includes>
+              <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}</url>
+              <toDir>${project.build.outputDirectory}/chembl</toDir>
+            </configuration>
+          </execution>
+          <execution>
+            <id>download-license</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>download-single</goal>
+            </goals>
+            <configuration>
+              <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}/</url>
+              <fromFile>LICENSE</fromFile>
+              <toDir>${project.build.outputDirectory}/META-INF/</toDir>
+            </configuration>
+          </execution>
+          <execution>
+            <id>download-notice</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>download-single</goal>
+            </goals>
+            <configuration>
+              <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}/</url>
+              <fromFile>REQUIRED.ATTRIBUTION</fromFile>
+              <toFile>${project.build.outputDirectory}/META-INF/NOTICE</toFile>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/20.0</url>
-          <toDir>${project.build.directory}/classes/chembl</toDir>
-        </configuration>
       </plugin>
     </plugins>
   </build>
