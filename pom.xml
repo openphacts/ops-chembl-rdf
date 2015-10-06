@@ -4,8 +4,8 @@
   <groupId>org.openphacts.data</groupId>
   <artifactId>chembl-rdf</artifactId>
   <version>20.1.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>ChEMBL-RDF data</name>
+  <packaging>data</packaging>
+  <name>ChEMBL-RDF data plugin</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -47,7 +47,7 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
             <configuration>
               <includes>*.ttl.gz</includes>
               <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}</url>
-              <toDir>${project.build.outputDirectory}/data/${project.artifactId}</toDir>
+              <toDir>${project.build.outputDirectory}/</toDir>
             </configuration>
           </execution>
           <execution>
@@ -76,6 +76,14 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
           </execution>
         </executions>
       </plugin>
+
+        <plugin>
+          <groupId>no.s11.dataplugin</groupId>
+            <artifactId>data-maven-plugin</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
+          <extensions>true</extensions>
+        </plugin>
+
     </plugins>
   </build>
 
