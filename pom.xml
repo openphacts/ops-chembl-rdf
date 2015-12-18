@@ -80,12 +80,24 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
         <plugin>
           <groupId>no.s11.dataplugin</groupId>
             <artifactId>data-maven-plugin</artifactId>
-            <version>0.0.3-SNAPSHOT</version>
+            <version>0.0.6</version>
           <extensions>true</extensions>
         </plugin>
 
     </plugins>
   </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>bintray-stain-maven</id>
+            <name>bintray-plugins</name>
+            <url>http://dl.bintray.com/stain/maven</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
 
   <repositories>
     <repository>
