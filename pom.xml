@@ -59,7 +59,7 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
             <configuration>
               <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}/</url>
               <fromFile>LICENSE</fromFile>
-              <toDir>${project.build.outputDirectory}/META-INF/</toDir>
+              <toDir>${project.build.outputDirectory}/data/</toDir>
             </configuration>
           </execution>
           <execution>
@@ -71,7 +71,7 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
             <configuration>
               <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}/</url>
               <fromFile>REQUIRED.ATTRIBUTION</fromFile>
-              <toFile>${project.build.outputDirectory}/META-INF/NOTICE</toFile>
+              <toFile>${project.build.outputDirectory}/data/NOTICE</toFile>
             </configuration>
           </execution>
         </executions>
