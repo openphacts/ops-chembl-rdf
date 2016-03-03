@@ -47,7 +47,7 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
             <configuration>
               <includes>*.ttl.gz</includes>
               <url>http://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBL-RDF/${chembl.version}</url>
-              <toDir>${project.build.outputDirectory}/</toDir>
+              <toDir>${project.build.outputDirectory}/data</toDir>
             </configuration>
           </execution>
           <execution>
