@@ -21,7 +21,7 @@ The data in ChEMBL is covered by the licence in the file LICENSE.
 
 Under the -BY clause, we request attribution for subsequent use of ChEMBL.
 
-For publications using ChEMBL data, the primary current citation is: 
+For publications using ChEMBL data, the primary current citation is:
 
 1. A.P. Bento, A. Gaulton, A. Hersey, L.J. Bellis, J. Chambers, M. Davies, F.A. Krüger, Y. Light, L. Mak, S. McGlinchey, M. Nowotka, G. Papadatos, R. Santos &amp; J.P. Overington (2014) 'The ChEMBL bioactivity database: an update' Nucl. Acids Res. Database Issue. 42 D1083-D1090 DOI:10.1093/nar/gkt1031 PMID:24214965
 
@@ -34,10 +34,27 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
   <build>
     <plugins>
       <plugin>
+          <groupId>com.alexecollins.docker</groupId>
+          <artifactId>docker-maven-plugin</artifactId>
+          <version>2.11.9</version>
+          <executions>
+            <execution>
+              <id>download-data</id>
+              <phase>generate-resources</phase>
+              <goals>
+                <goal>start</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>wagon-maven-plugin</artifactId>
         <version>1.0</version>
         <executions>
+        <!--
+
           <execution>
             <id>download-rdf</id>
             <phase>generate-resources</phase>
@@ -50,6 +67,7 @@ If ChEMBL is incorporated into other works, we ask that the ChEMBL IDs are prese
               <toDir>${project.build.outputDirectory}/data</toDir>
             </configuration>
           </execution>
+        -->
           <execution>
             <id>download-license</id>
             <phase>generate-resources</phase>
