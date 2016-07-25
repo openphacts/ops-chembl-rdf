@@ -1,0 +1,67 @@
+-- Replaced Enzyme prefixes
+
+sparql  PREFIX cco: <http://rdf.ebi.ac.uk/terms/chembl#>
+ INSERT {
+    GRAPH <http://www.ebi.ac.uk/chembl> {
+        ?chembl_uri cco:targetCmptXref ?enzyme_uri . 
+        ?enzyme_uri a cco:EnzymeClassRef .
+    }
+ }
+ WHERE {
+    GRAPH <http://www.ebi.ac.uk/chembl> {
+        ?chembl_uri cco:targetCmptXref ?ec_uri . 
+        ?ec_uri a cco:EnzymeClassRef ;
+            rdfs:label ?label .
+        BIND(IRI(CONCAT('http://purl.uniprot.org/enzyme/', STRAFTER(STR(?ec_uri), 'http://identifiers.org/ec-code/'))) AS ?enzyme_uri )
+    }
+ };
+
+-- Created activity types and unit URIs:
+
+sparql  INSERT {
+    GRAPH <http://www.ebi.ac.uk/chembl>  {
+        ?type_uri rdfs:subClassOf ?act_type ;
+            rdfs:label ?standard_type ;
+        <http://rdf.ebi.ac.uk/terms/chembl#hasQUDT>  ?qudt_uri .
+            ?qudt_uri rdfs:label ?standard_unit .
+    }
+ }
+ WHERE {
+    GRAPH <http://www.ebi.ac.uk/chembl>  {
+        ?act <http://rdf.ebi.ac.uk/terms/chembl#standardType> ?standard_type  ;
+            <http://rdf.ebi.ac.uk/terms/chembl#standardUnits> ?standard_unit ;
+            <http://rdf.ebi.ac.uk/terms/chembl#hasQUDT> ?qudt_uri ;
+            a ?act_type .
+        BIND( IRI (CONCAT("http://www.openphacts.org/terms/chembl#", ENCODE_FOR_URI(?standard_type))) AS ?type_uri)
+    }
+ };
+
+-- Graph URI http://www.ebi.ac.uk/chembl/target/direct
+
+sparql PREFIX chembl_protclass: <http://rdf.ebi.ac.uk/resource/chembl/protclass/>
+ INSERT {
+    GRAPH <http://www.ebi.ac.uk/chembl/target/direct> {
+        ?subclass rdfs:subClassOf ?superclass .
+    }
+ }
+ WHERE {
+    GRAPH <http://www.ebi.ac.uk/chembl>  {
+        ?subclass rdfs:subClassOf ?superclass ;
+            rdfs:subClassOf* chembl_protclass:CHEMBL_PC_0 .
+    }
+ };
+
+-- Graph URI http://www.ebi.ac.uk/chembl/target/inference
+
+sparql INSERT { 
+    GRAPH <http://www.ebi.ac.uk/chembl/target/inference> {
+        ?subclass rdfs:subClassOf ?superclass 
+    }
+ }
+ WHERE {
+     GRAPH <http://www.ebi.ac.uk/chembl/target/direct> {
+         ?subclass rdfs:subClassOf* ?superclass ;
+            rdfs:subClassOf [] 
+     }
+ };
+
